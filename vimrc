@@ -116,6 +116,12 @@ filetype plugin indent on
 noremap  <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
 
+" tern_for_vim - turn off the preview window
+set completeopt-=preview
+
+" vim-jsx - allow syntax highlighting in .js files
+let g:jsx_ext_required = 0
+
 " CtrlP
 " If Ctrl P can't find a file, use CtrlPClearAllCaches to clear
 
@@ -184,4 +190,3 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-
