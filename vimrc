@@ -1,7 +1,6 @@
 " Type :so % to refresh .vimrc after making changes
 
-" Use Vim settings, rather then Vi settings. This setting must be as early as
-" possible, as it has side effects.
+" Use Vim settings, rather then Vi settings
 set nocompatible
 
 " Leader - ( Spacebar )
@@ -11,7 +10,6 @@ execute pathogen#infect()
 call pathogen#helptags()
 
 let g:used_javascript_libs = 'angularjs,angularui,jquery,underscore,react,jasmine,chai'
-let g:JSHintHighlightErrorLine = 1
 
 set path=$PWD/**
 
@@ -69,9 +67,16 @@ set nowritebackup
 set fileformats=unix,dos,mac            " Used of EOL formats
 set completeopt=menuone,longest,preview " Options for insert mode completion
 set completeopt-=preview                " tern_for_vim - turn off the preview window
+set guioptions-=r   " Remove right-hand scrollbar
+set guioptions-=L   " Remove left-hand scrollbar
 
+" Macvim only
+hi NonText guifg=bg
+
+" Personal hotkeys
 inoremap jk <esc>
 nnoremap <leader>; A;<esc>
+nnoremap <leader>, A,<esc>
 nnoremap <leader>n :noh<cr>
 nnoremap <leader>e :redraw!<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
@@ -84,42 +89,15 @@ nnoremap <Leader>b :w<CR>:bprevious<CR>
 nnoremap <tab> %
 vnoremap <tab> %
 
-" Autocomplete pairs
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
-inoremap ' ''<Esc>i
-inoremap " ""<Esc>i
-inoremap ` ``<Esc>i
-
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
-" <Off> Navigate properly when lines are wrapped
-" nnoremap j gj
-" nnoremap k gk
-
-""" NerdTree """
+" NerdTree
 autocmd vimenter * NERDTree  " Open NERDTREE when vim opens
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if only NERDTree is open
 nnoremap <S-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['.git$','.DS_Store']
-
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-" ------Plugins-------
-Plugin 'tomtom/tcomment_vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Valloric/YouCompleteMe'
-
-call vundle#end()
-filetype plugin indent on
 
 noremap  <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
@@ -165,11 +143,6 @@ inoremap <C-k>  <Esc>:tabclose<CR>i
 " Toggle Git Gutter
 noremap  <Leader>g :GitGutterToggle<CR>
 
-" This machine config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
-
 " Fix paste from system clipboard
 if &term =~ "xterm.*"
     let &t_ti = &t_ti . "\e[?2004h"
@@ -187,8 +160,8 @@ if &term =~ "xterm.*"
 endif
 
 " Move lines up or down
-execute "set <M-j>=\ej"
-execute "set <M-k>=\ek"
+execute "set <M-j>=∆"
+execute "set <M-k>=˚"
 nnoremap <M-j> :m .+1<CR>==
 nnoremap <M-k> :m .-2<CR>==
 inoremap <A-j> <Esc>:m .+1<CR>==gi
@@ -200,10 +173,8 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
@@ -213,3 +184,26 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
+
+" Syntastic and ESLint
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
