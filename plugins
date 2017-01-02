@@ -1,20 +1,20 @@
 " My Plugins
 
 YouCompleteMe
-javascript-libraries-syntax.vim
-tcomment_vim
-vim-jsx
-auto-pairs
-nerdtree
-tern_for_vim
-vim-gitgutter
-vim-quantum
-colorschemes
-pathogen
-vim-airline
-vim-javascript-syntax
-vim-twig
 ctrlp.vim
+pathogen
+tern_for_vim
+vim-bbye
+vim-javascript-syntax
+auto-pairs
+delimitMate
 syntastic
+vim-airline
+vim-gitgutter
+vim-jsx
+colorschemes
+nerdtree
+tcomment_vim
 vim-airline-themes
-vim-json
+vim-javascript
+vim-quantum
