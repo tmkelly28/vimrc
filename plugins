@@ -1,20 +1,6 @@
 " My Plugins
 
-YouCompleteMe
-ctrlp.vim
-pathogen
-tern_for_vim
-vim-bbye
-vim-javascript-syntax
-auto-pairs
-delimitMate
-syntastic
-vim-airline
-vim-gitgutter
-vim-jsx
-colorschemes
-nerdtree
-tcomment_vim
-vim-airline-themes
-vim-javascript
-vim-quantum
+YouCompleteMe         delimitMate           tcomment_vim          vim-bbye              vim-javascript-syntax
+auto-pairs            nerdtree              tern_for_vim          vim-colors-solarized  vim-jsx
+colorschemes          pathogen              vim-airline           vim-gitgutter         vim-quantum
+ctrlp.vim             syntastic             vim-airline-themes    vim-javascript
