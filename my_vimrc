@@ -11,12 +11,13 @@ call pathogen#helptags()
 
 set path=$PWD/**
 
-" other favorites: Tomorrow, Tomorrow-Night
-set background=dark
-colorscheme quantum
-
 syntax on
 filetype plugin indent on
+
+" other favorites: Tomorrow, Tomorrow-Night
+set background=dark
+colorscheme solarized
+" colorscheme quantum
 
 set number        " Shows line numbers
 set tabstop=2     " Sets tabs to be two spaces
